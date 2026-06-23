@@ -17,14 +17,68 @@ nvim
 On first launch `init.lua` bootstraps lazy.nvim automatically, then lazy installs
 every plugin pinned in `lazy-lock.json`. Wait for it to finish, then restart Neovim.
 
-## Requirements
+## System dependencies
 
-- Neovim **0.9+** (uses `vim.uv`)
-- `git` (lazy.nvim clones plugins over it)
-- A [Nerd Font](https://www.nerdfonts.com/) for icons (neo-tree, lualine, alpha)
-- `ripgrep` + `fd` — Telescope live grep / file find
-- `node` — Copilot and several LSP servers
-- LSP servers / formatters / linters are installed via Mason on demand
+These live **outside** Neovim — Mason/lazy will NOT install them. Set them up per
+machine before the config works fully.
+
+### Required (core editor + plugins)
+
+| Tool | Why |
+| --- | --- |
+| Neovim **0.9+** | uses `vim.uv` |
+| `git` | lazy.nvim clones plugins |
+| C compiler + `make` (clang/gcc) | builds Treesitter parsers and `telescope-fzf-native` |
+| `curl`/`wget`, `unzip` | Mason downloads servers/tools |
+| **Node.js 18+** + `npm` | Copilot, markdown-preview, and node-based LSPs (`ts_ls`, `pyright`, `html`, `cssls`, `jsonls`) + `prettier`/`eslint_d`/`markdownlint` |
+| A [Nerd Font](https://www.nerdfonts.com/) | icons in neo-tree / lualine / alpha |
+
+### Search (Telescope)
+
+| Tool | Why |
+| --- | --- |
+| `ripgrep` (`rg`) | `<leader>fg` live grep |
+| `fd` | `<leader>ff` find files (faster than fallback) |
+
+### LaTeX — only if you edit `.tex` (vimtex)
+
+| Tool | Why |
+| --- | --- |
+| TeX distribution (MacTeX / TeX Live) → `latexmk` | compilation |
+| **Skim** (macOS) | SyncTeX-aware PDF viewer (`vimtex_view_method = "skim"`) |
+
+### Optional
+
+| Tool | Why |
+| --- | --- |
+| `kitty` terminal | `vim-kitty-navigator` `<C-h/j/k/l>` window nav (auto-skipped elsewhere) |
+
+### Quick install
+
+**macOS (Homebrew):**
+
+```sh
+brew install neovim git node ripgrep fd
+brew install --cask font-jetbrains-mono-nerd-font   # any Nerd Font
+brew install --cask skim                            # LaTeX preview (optional)
+brew install --cask mactex-no-gui                   # LaTeX engine (optional, large)
+```
+
+**Debian/Ubuntu:**
+
+```sh
+sudo apt install neovim git build-essential nodejs npm ripgrep fd-find unzip curl
+# install a Nerd Font manually; texlive-full for LaTeX (optional)
+```
+
+### Per-machine auth (not an install)
+
+```
+:Copilot auth     # log in to GitHub Copilot, once per machine
+```
+
+LSP servers, formatters, and linters themselves are installed automatically by
+Mason on first launch — they are NOT in this table.
 
 ## Layout
 
