@@ -43,14 +43,12 @@ return {
 
 			local servers = {
 				"ts_ls",
-				"solargraph",
 				"html",
 				"lua_ls",
 				"pyright",
 				"ruff",
 				"cssls",
 				"jsonls",
-				"bashls",
 			}
 			for _, server in ipairs(servers) do
 				vim.lsp.config[server] = {
