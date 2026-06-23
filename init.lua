@@ -20,4 +20,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Setup lazy.nvim
-require("lazy").setup("plugins")
+-- ponytail: no plugin needs luarocks; disable hererocks to kill the checkhealth error
+require("lazy").setup("plugins", {
+	rocks = { enabled = false },
+})
